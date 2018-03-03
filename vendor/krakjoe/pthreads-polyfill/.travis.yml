@@ -1,0 +1,13 @@
+language: php
+
+php:
+  - 7.0
+
+install:
+  - composer install
+
+script:
+  - phpdbg -qrr vendor/bin/phpunit tests --coverage-text
+  - git clone https://github.com/krakjoe/pthreads
+  - cd pthreads && phpize && ./configure && sudo make install && cd ../
+  - php -dextension=pthreads.so vendor/bin/phpunit tests

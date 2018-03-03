@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: daudm
+ * Date: 2/25/2018
+ * Time: 4:38 PM
+ */
+
+require __DIR__.'/vendor/autoload.php';
+
+use dawood\ReconCat\Commands\ReconCat;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+$scrapper = new ReconCat;
+
+$application->add($scrapper);
+
+$application->setDefaultCommand('recon');
+
+$application->run();

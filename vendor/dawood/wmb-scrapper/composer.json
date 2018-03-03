@@ -1,0 +1,19 @@
+{
+    "name": "dawood/wmb-scrapper",
+    "description": "A small Php package to fetch archive url snapshots from archive.org.using it you can fetch complete list of snapshot urls of any year orcomplete list of all years possible.This package can be used to do recon of any target.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["shell","php","wayBackMachine","archive.org","snapshots"],
+    "authors": [
+        {
+            "name": "Dawood Ikhlaq",
+            "email": "daudmalik06@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "dawood\\WBMScrapper\\": "src/"
+        }
+    }
+}

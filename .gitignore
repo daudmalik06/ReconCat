@@ -1,0 +1,5 @@
+*.swp
+.idea/
+tmp/
+!Output/.gitkeep
+Output/*
