@@ -2,20 +2,26 @@
 if (!extension_loaded("pthreads")) {
 
 	class Worker extends Thread {
-
-		public function collect(Closure $collector) {
+		public function collect(Closure $collector = null) {
 			foreach ($this->gc as $idx => $collectable) {
-				if ($collector($collectable)) {
-					unset($this->gc[$idx]);
+				if ($collector) {
+					if ($collector($collectable)) {
+						unset($this->gc[$idx]);
+					}
+				} else {
+					if ($this->collector($collectable)) {
+						unset($this->gc[$idx]);
+					}
 				}
 			}
 
-			return count($this->gc);
+			return count($this->gc) + count($this->stack);
 		}
+		public function collector(Collectable $collectable) { return $collectable->isGarbage(); }
 		public function shutdown() { return $this->join(); }
 		public function isShutdown() { return $this->isJoined(); }
 		public function unstack() { return array_shift($this->stack); }
-		public function stack(Collectable $collectable) {
+		public function stack(Threaded $collectable) {
 			$this->stack[] = $collectable;
 			if ($this->isStarted()) {
 				$this->runCollectable(count($this->stack)-1, $collectable);

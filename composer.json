@@ -1,6 +1,6 @@
 {
     "require": {
-        "krakjoe/pthreads-polyfill": "1.0.1",
+        "krakjoe/pthreads-polyfill": "1.1.0",
         "symfony/console": "^3.4",
         "dawood/wmb-scrapper": "1.1"
     },

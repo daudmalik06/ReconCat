@@ -1,5 +1,5 @@
 <?php
-class WorkerTestWork extends Collectable {
+class WorkerTestWork extends Threaded implements Collectable {
 	public function run() {
 		$this->synchronized(function() {
 			$this->hasWorker = 
@@ -8,6 +8,10 @@ class WorkerTestWork extends Collectable {
 			$this->notify();
 		});
 	}
+
+	public function isGarbage() : bool { return $this->garbage; }
+	private function setGarbage() { $this->garbage = true; }
+	private $garbage = false;
 }
 
 class WorkerTest extends PHPUnit_Framework_TestCase {

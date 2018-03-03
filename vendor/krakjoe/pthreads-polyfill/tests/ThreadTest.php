@@ -47,14 +47,6 @@ class ThreadTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($thread->running, true);
 	}
 
-	public function testThreadIsKilled() {
-		$thread = new TestThread();
-		$this->assertEquals($thread->start(), true);
-		$this->assertEquals($thread->kill(), true);
-		$this->assertEquals($thread->join(), true);
-		$this->assertEquals($thread->isTerminated(), true);
-	}
-
 	public function testThreadIds() {
 		$thread = new Thread();
 		$this->assertInternalType("int", $thread->getThreadId());

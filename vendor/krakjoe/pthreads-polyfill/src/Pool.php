@@ -9,7 +9,7 @@ if (!extension_loaded("pthreads")) {
 			$this->ctor = $ctor;
 		}
 
-		public function submit(Collectable $collectable) {
+		public function submit(Threaded $collectable) {
 			if ($this->last > $this->size) {
 				$this->last = 0;
 			}
@@ -23,13 +23,13 @@ if (!extension_loaded("pthreads")) {
 			$this->workers[$this->last++]->stack($collectable);		
 		}
 
-		public function submitTo($worker, Collectable $collectable) {
+		public function submitTo($worker, Threaded $collectable) {
 			if (isset($this->workers[$worker])) {
 				$this->workers[$worker]->stack($collectable);
 			}
 		}
 
-		public function collect(Closure $collector) {
+		public function collect(Closure $collector = null) {
 			$total = 0;
 			foreach ($this->workers as $worker)
 				$total += $worker->collect($collector);

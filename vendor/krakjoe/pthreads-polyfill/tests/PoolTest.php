@@ -12,7 +12,7 @@ class PoolTestWorker extends Worker {
 	}
 }
 
-class PoolTestWork extends Collectable {
+class PoolTestWork extends Threaded implements Collectable {
 	public function run() {
 		$this->hasWorker = 
 			$this->worker instanceof Worker;
@@ -22,9 +22,13 @@ class PoolTestWork extends Collectable {
 			$this->worker->threaded instanceof Threaded;
 		$this->setGarbage();
 	}
+
+	public function isGarbage() : bool { return true; }
+	private function setGarbage() { $this->garbage = true; }
+	private $garbage = false;
 }
 
-class PoolTestSync extends Collectable {
+class PoolTestSync extends Threaded implements Collectable {
 	public function run() {
 		$this->synchronized(function(){
 			$this->finished = true;
@@ -32,6 +36,10 @@ class PoolTestSync extends Collectable {
 		});
 		$this->setGarbage();
 	}
+
+	public function isGarbage() : bool { return true; }
+	private function setGarbage() { $this->garbage = true; }
+	private $garbage = false;
 }
 
 class PoolTest extends PHPUnit_Framework_TestCase {
