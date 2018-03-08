@@ -48,6 +48,9 @@ For help
 php recon --help
 ```
 
+![ReconCat Example](/src/reconCatExample.JPG)
+![ReconCat Help](/src/reconCatHelp2.JPG)
+
 Other commands
 ```
 php recon --url=https://github.com -t10  (fetch all snapshot of github with 10 threads)
