@@ -16,30 +16,24 @@ class WBMScrapperClient extends Threaded
     /**
      * @var int
      */
-    private $year;
-    /**
-     * @var bool
-     */
-    private $verbose;
+    public $year;
     /**
      * @var string
      */
     private $url;
+    private $data;
     private $finishedWorking;
-    private $snapshots;
 
     /**
      * WBMScrapperClient constructor.
      * @param int $year
      * @param string $url
-     * @param bool $verbosity
      * @param $callback
      * @internal param $output
      */
-    public function __construct($year, $url, $verbosity = false)
+    public function __construct($year, $url)
     {
         $this->year = $year;
-        $this->verbose = $verbosity;
         $this->url = $url;
     }
 
@@ -59,12 +53,7 @@ class WBMScrapperClient extends Threaded
         {
             file_put_contents($file,$snapshot.PHP_EOL, FILE_APPEND);
         }
-        if($this->verbose)
-        {
-            print_r($snapshots);
-        }
-        $this->snapshots = $snapshots;
-        echo $this->year.' Fetched'.PHP_EOL;
+        $this->data=file_get_contents($file);
         $this->finishedWorking = true;
     }
 
@@ -75,6 +64,6 @@ class WBMScrapperClient extends Threaded
 
     public function getData()
     {
-        return $this->snapshots;
+        return $this->data;
     }
 }

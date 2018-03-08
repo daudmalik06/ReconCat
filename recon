@@ -5,12 +5,27 @@
  * Date: 2/25/2018
  * Time: 4:38 PM
  */
-
 require __DIR__.'/vendor/autoload.php';
 
 use dawood\ReconCat\Commands\ReconCat;
 use Symfony\Component\Console\Application;
 
+$logo = "<fg=red;options=bold>
+
+
+    ____                             ______        __
+   / __ \ ___   _____ ____   ____   / ____/____ _ / /_
+  / /_/ // _ \ / ___// __ \ / __ \ / /    / __ `// __/
+ / _, _//  __// /__ / /_/ // / / // /___ / /_/ // /_
+/_/ |_| \___/ \___/ \____//_/ /_/ \____/ \__,_/ \__/
+
+</><info>############### <fg=red;options=bold>Made By Dawood Ikhlaq</> ###############</info>
+
+
+";
+
+$output = new Symfony\Component\Console\Output\ConsoleOutput();
+$output->writeln($logo);
 $application = new Application();
 $scrapper = new ReconCat;
 
